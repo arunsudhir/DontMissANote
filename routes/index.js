@@ -43,7 +43,7 @@ router.post("/", function(req, res) {
 			});
 		} else {
 			res.render("error", {
-				message: "OneNote API Error",
+				message: "OneNote API Unexpected Result",
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
@@ -75,7 +75,7 @@ router.post("/", function(req, res) {
 			});
 		} else {
 			res.render("error", {
-				message: "OneNote API Error",
+				message: "OneNote API Unexpected Result",
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
@@ -107,7 +107,7 @@ router.post("/", function(req, res) {
 			});
 		} else {
 			res.render("error", {
-				message: "OneNote API Error",
+				message: "OneNote API Unexpected Result",
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
@@ -141,6 +141,9 @@ router.post("/", function(req, res) {
 			break;
 		case "getSharedPages":
 			createExamples.getSharedPages(accessToken, getPagesCallback);
+			break;
+		default :
+			createExamples.getPageJsonContent(accessToken, getPagesCallback, exampleType);
 			break;
     }
 });
