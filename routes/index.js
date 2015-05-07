@@ -103,6 +103,9 @@ router.post("/", function(req, res) {
 		case "getNotebooks":
 			createExamples.getNotebooks(accessToken, getNotebooksCallback);
 			break;
+		case "getNotebooksWithExpand":
+			createExamples.getNotebooksWithExpand(accessToken, getNotebooksCallback);
+			break;
     }
 });
 

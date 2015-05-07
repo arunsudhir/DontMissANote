@@ -5,6 +5,14 @@ block content
   a(href='/') Go back
   br
   ul
-    - for (var i = 0; i < notebooks.length; ++i)
-      li= notebooks[i].name + ' - ' + notebooks[i].lastModifiedTime
+    - for (var n = 0; n < notebooks.length; ++n)
+      li= notebooks[n].name + ' - ' + notebooks[n].lastModifiedTime
+          - if (notebooks[n].sections !== undefined)
+            ul
+              - for (var s = 0; s < notebooks[n].sections.length; ++s)
+                li= notebooks[n].sections[s].name + ' - ' + notebooks[n].sections[s].lastModifiedTime
+                    - if (notebooks[n].sections[s].pages !== undefined)
+                      ul
+                        - for (var p = 0; p < notebooks[n].sections[s].pages.length; ++p)
+                          li= notebooks[n].sections[s].pages[p].title + ' - ' + notebooks[n].sections[s].pages[p].lastModifiedTime
   pre #{body}
