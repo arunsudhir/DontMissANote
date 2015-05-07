@@ -1,0 +1,10 @@
+﻿extends layout
+
+block content
+  h1= title
+  a(href='/') Go back
+  br
+  ul
+    - for (var i = 0; i < notebooks.length; ++i)
+      li= notebooks[i].name + ' - ' + notebooks[i].lastModifiedTime
+  pre #{body}
