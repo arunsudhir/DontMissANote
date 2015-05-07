@@ -3,6 +3,7 @@ var router = express.Router();
 
 var liveConnect = require('../lib/liveconnect-client');
 var createExamples = require('../lib/create-examples');
+var emailer = require('../lib/node-mailer');
 
 /* GET Index page */
 router.get('/', function (req, res) {
@@ -64,6 +65,8 @@ router.post('/', function (req, res) {
             break;
         case 'file':
             createExamples.createPageWithFile(accessToken, createResultCallback);
+            break;
+        case 'email':
             break;
     }
 });
