@@ -13,7 +13,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <StartWebBrowser>True</StartWebBrowser>
-    <LaunchUrl>http://localhost:3000</LaunchUrl>
+    <LaunchUrl>http://onenoteapisamples.com:3000</LaunchUrl>
     <NodejsPort>3000</NodejsPort>
     <NodeExeArguments>
     </NodeExeArguments>
@@ -36,6 +36,7 @@
     <Content Include="images\OneNoteMSAScreen.png" />
     <Compile Include="lib\create-examples.js" />
     <Compile Include="lib\liveconnect-client.js" />
+    <Compile Include="lib\OneNoteApi.js" />
     <Compile Include="routes\callback.js" />
     <Compile Include="routes\index.js" />
     <Content Include="views\callback.jade" />
