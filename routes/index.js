@@ -131,6 +131,7 @@ router.post("/", function(req, res) {
             createExamples.createPageWithFile(accessToken, createResultCallback);
             break;
         case 'email':
+	        emailer.sendEmail();
 			break;
 		case "getNotebooks":
 			createExamples.getNotebooks(accessToken, getNotebooksCallback);
