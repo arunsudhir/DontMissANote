@@ -70,8 +70,40 @@ router.post("/", function(req, res) {
 		
 		if (notebooks) {
 			res.render("getNotebooksResult", {
-				title: "OneNote API Result",
+				title: "Notebooks",
 				notebooks: notebooks
+			});
+		} else {
+			res.render("error", {
+				message: "OneNote API Error",
+				error: { status: httpResponse.statusCode, details: body }
+			});
+		}
+	};
+	
+	// Render the API response with the created notebooks
+	var getPagesCallback = function (error, httpResponse, body) {
+		if (error) {
+			return res.render("error", {
+				message: "HTTP Error",
+				error: { details: JSON.stringify(error, null, 2) }
+			});
+		}
+		
+		// Parse the body since it is a JSON response
+		var parsedBody;
+		try {
+			parsedBody = JSON.parse(body);
+		} catch (e) {
+			parsedBody = {};
+		}
+		// Get the submitted resource url from the JSON response
+		var pages = parsedBody["value"];
+		
+		if (pages) {
+			res.render("getPagesResult", {
+				title: "Pages that are shared",
+				pages: pages
 			});
 		} else {
 			res.render("error", {
@@ -105,6 +137,9 @@ router.post("/", function(req, res) {
 			break;
 		case "getNotebooksWithExpand":
 			createExamples.getNotebooksWithExpand(accessToken, getNotebooksCallback);
+			break;
+		case "getSharedPages":
+			createExamples.getSharedPages(accessToken, getPagesCallback);
 			break;
     }
 });

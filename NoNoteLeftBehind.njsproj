@@ -43,6 +43,7 @@
     <Content Include="views\callback.jade" />
     <Content Include="views\error.jade" />
     <Content Include="views\getNotebooksResult.jade" />
+    <Content Include="views\getPagesResult.jade" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\result.jade" />
