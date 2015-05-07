@@ -15,7 +15,8 @@
     <StartWebBrowser>True</StartWebBrowser>
     <LaunchUrl>http://localhost:3000</LaunchUrl>
     <NodejsPort>3000</NodejsPort>
-    <NodeExeArguments>./bin/www</NodeExeArguments>
+    <NodeExeArguments>
+    </NodeExeArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
