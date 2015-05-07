@@ -36,8 +36,8 @@
     <Content Include="images\OneNoteMSAScreen.png" />
     <Compile Include="lib\create-examples.js" />
     <Compile Include="lib\liveconnect-client.js" />
-    <Compile Include="lib\node-mailer.js" />
     <Compile Include="lib\OneNoteApi.js" />
+    <Compile Include="lib\sendgrid-mailer.js" />
     <Compile Include="routes\callback.js" />
     <Compile Include="routes\index.js" />
     <Content Include="views\callback.jade" />
