@@ -9,8 +9,8 @@ block content
           ul.nav.navbar-nav.navbar-right             
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
-                img(src='#{SignedInUserPic}', alt='Profile pic' width='50'  height='50' style='border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;no-repeat;box-shadow: 0 0 8px rgba(0, 0, 0, .8);-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);')
-                !{SignedInUser}
+                img.profile-pic(src='#{SignedInUserPic}', alt='Profile pic' no-repeat;)
+                &nbsp;&nbsp;&nbsp;!{SignedInUser}
                 span.caret
               ul.dropdown-menu(role='menu')
                 li
@@ -22,10 +22,44 @@ block content
           h4.form-signin-heading Please enter the keywords that you want us to look for
               br
               br
-              label.sr-only(for='inputKeywords') Keywords:
-              input#inputKeywords.form-control(type='text', placeholder='Enter your keywords here..', required='', autofocus='')
-              br
-              button#searchBtn.btn.btn-primary.btn-block(type='button') Look for these in my notes
+              .input-group
+                 input.form-control(type='text', placeholder='Please enter a keyword', aria-describedby='basic-addon1')
+                 span#basic-addon1.input-group-addon +
+        #keywordsPanel.panel.panel-default
+              // Default panel contents
+           .panel-heading Keywords added so far
+              // List group
+              ul.list-group
+                li#li1.list-group-item(style='display:block')
+                    Keyword1
+                    #alert_buttons
+                     span.edit_button.alert_button(tabindex='0', title='Edit', role='button')          
+                     span.delete_button.alert_button(tabindex='0', title='Delete', role='button')
+                li#li2.list-group-item(style='display:none')
+                    Keyword1
+                    #alert_buttons
+                     span.edit_button.alert_button(tabindex='0', title='Edit', role='button')          
+                     span.delete_button.alert_button(tabindex='0', title='Delete', role='button')
+                li#li3.list-group-item(style='display:none')
+                    Keyword1
+                    #alert_buttons
+                     span.edit_button.alert_button(tabindex='0', title='Edit', role='button')          
+                     span.delete_button.alert_button(tabindex='0', title='Delete', role='button')
+                li#li4.list-group-item(style='display:none')
+                    Keyword1        
+                    #alert_buttons
+                     span.edit_button.alert_button(tabindex='0', title='Edit', role='button')          
+                     span.delete_button.alert_button(tabindex='0', title='Delete', role='button')
+                li#li5.list-group-item(style='display:none')
+                    Keyword1        
+                    #alert_buttons
+                     span.edit_button.alert_button(tabindex='0', title='Edit', role='button')          
+                     span.delete_button.alert_button(tabindex='0', title='Delete', role='button')
+                li#li6.list-group-item(style='display:none')
+                    Keyword1        
+                    #alert_buttons
+                     span.edit_button.alert_button(tabindex='0', title='Edit', role='button')          
+                     span.delete_button.alert_button(tabindex='0', title='Delete', role='button')
         center
          #containerActive
           progress.progress-striped.active
