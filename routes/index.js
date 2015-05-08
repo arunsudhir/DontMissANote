@@ -5,6 +5,8 @@ var liveConnect = require('../lib/liveconnect-client');
 var createExamples = require('../lib/create-examples');
 var oneNoteNodes = require('../lib/OneNoteNodes');
 var sendgridEmailer = require('../lib/sendgrid-mailer.js');
+var vasher = require('../lib/vash-worker.js');
+var signedInUserEmail = "onecap@outlook.com";
 
 /* GET Index page */
 router.get("/", function(req, res) {
@@ -144,11 +146,13 @@ router.post("/", function(req, res) {
 			});
 		}
 
-		res.render("error", {
-			message: "Returning JSON representation",
-			error: { status: "Yay!", details: JSON.stringify(pagesMetadata, null, "\t") }
-		});
-    };
+        var html = vasher.composeMailBody(pagesMetadata);
+            res.render("error", {
+                message: "Returning JSON representation",
+                error: { status: "Yay we're sending you a mail alert now... Grab a coffee and check your inbox!", details : JSON.stringify(pagesMetadata, null, "\t")}
+        });
+	    sendgridEmailer.sendEmail(signedInUserEmail, html, "Don't miss a shared note: Alerts");
+	};
     
     function renderHomePage(){
         var authUrl = liveConnect.getAuthUrl();
@@ -172,6 +176,7 @@ router.post("/", function(req, res) {
         }
         // Get the submitted resource url from the JSON response
         var signedInUser = parsedBody["name"] ? parsedBody["name"] : (parsedBody["emails"]["preferred"]? parsedBody["emails"]["preferred"] : null);
+        signedInUserEmail = parsedBody["emails"]["preferred"];
         if (signedInUser) {
             var image = null;
             liveConnect.getUserPic(accessToken, function (error, httpResponse, body) {
