@@ -82,7 +82,7 @@ function updateLoginButton(isLoggedIn) {
     $loginBtn.text(isLoggedIn ? 'Sign Out' : 'Sign In');
     $loginBtn.off('click');
     $loginBtn.on('click', function () {
-        disableLoginButton(true);
+       // disableLoginButton(true);
         if (isLoggedIn) {
             deleteAllCookies();
         } else {
@@ -95,17 +95,17 @@ function updateLoginButton(isLoggedIn) {
 function checkLogin() {
     if (getCookie("access_token")) {
         if (!isLoggedIn) {
-            disableLoginButton(false);
+            //disableLoginButton(false);
             isLoggedIn = true;
             updateLoginButton(isLoggedIn);
             $('#sds').show();
         }
     } else {
+        $('#sds').hide();
         if (isLoggedIn) {
-            disableLoginButton(false);
+            //disableLoginButton(false);
             isLoggedIn = false;
             updateLoginButton(isLoggedIn);
-            $('#sds').hide();
         }
     }
 }
