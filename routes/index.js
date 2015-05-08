@@ -3,7 +3,7 @@ var router = express.Router();
 
 var liveConnect = require('../lib/liveconnect-client');
 var createExamples = require('../lib/create-examples');
-var emailer = require('../lib/node-mailer');
+var sendgridEmailer = require('../lib/sendgrid-mailer.js');
 
 /* GET Index page */
 router.get("/", function(req, res) {
@@ -43,7 +43,7 @@ router.post("/", function(req, res) {
 			});
 		} else {
 			res.render("error", {
-				message: "OneNote API Error",
+				message: "OneNote API Unexpected Result",
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
@@ -75,7 +75,7 @@ router.post("/", function(req, res) {
 			});
 		} else {
 			res.render("error", {
-				message: "OneNote API Error",
+				message: "OneNote API Unexpected Result",
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
@@ -107,7 +107,7 @@ router.post("/", function(req, res) {
 			});
 		} else {
 			res.render("error", {
-				message: "OneNote API Error",
+				message: "OneNote API Unexpected Result",
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
@@ -131,8 +131,8 @@ router.post("/", function(req, res) {
             createExamples.createPageWithFile(accessToken, createResultCallback);
             break;
         case 'email':
-	        emailer.sendEmail();
-			break;
+           sendgridEmailer.sendEmail("hidex2015@outlook.com", "Hi <b> This mail brought to you by hackathon<b>", "Yo check this out");
+	        break;
 		case "getNotebooks":
 			createExamples.getNotebooks(accessToken, getNotebooksCallback);
 			break;
@@ -141,6 +141,9 @@ router.post("/", function(req, res) {
 			break;
 		case "getSharedPages":
 			createExamples.getSharedPages(accessToken, getPagesCallback);
+			break;
+		default :
+			createExamples.getPageJsonContent(accessToken, getPagesCallback, exampleType);
 			break;
     }
 });

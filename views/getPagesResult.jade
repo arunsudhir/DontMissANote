@@ -4,7 +4,10 @@ block content
   h1= title
   a(href='/') Go back
   br
-  ul
-    - for (var n = 0; n < pages.length; ++n)
-      li= pages[n].title + ' - ' + pages[n].lastModifiedTime
+  form(id="getPageJson" name="getPageJson", method="post")
+      ul
+        - for (var n = 0; n < pages.length; ++n)
+          li= pages[n].title + ' - ' + pages[n].lastModifiedTime
+          button(type="submit", name="submit", value=pages[n].id) Get this page's JSON content
+          br
   pre #{body}
