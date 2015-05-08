@@ -135,6 +135,20 @@ router.post("/", function(req, res) {
 			error: { status: httpResponse.statusCode, details: JSON.stringify(paragraphNodes, null, "\t") }
 		});
 	};
+	
+	var get10SharedPagesCallback = function (error, paragraphNodes) {
+		if (error) {
+			return res.render("error", {
+				message: "HTTP Error",
+				error: { details: JSON.stringify(error, null, 2) }
+			});
+		}
+
+		res.render("error", {
+			message: "OneNote API paragraph nodes",
+			error: { status: "Yay!", details: JSON.stringify(paragraphNodes, null, "\t") }
+		});
+	};
 
     // Request the specified create example
     switch (exampleType) {
@@ -164,6 +178,9 @@ router.post("/", function(req, res) {
 			break;
 		case "getSharedPages":
 			createExamples.getSharedPages(accessToken, getPagesCallback);
+			break;
+		case "get10SharedPages":
+			createExamples.get10SharedPages(accessToken, get10SharedPagesCallback);
 			break;
 		default :
 			createExamples.getPageJsonContent(accessToken, getTestPagesCallback, exampleType);

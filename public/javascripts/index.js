@@ -2,7 +2,7 @@ var $loginBtn,
     isLoggedIn;
 
 $(function () {
-    $loginBtn = $('#loginBtn');
+    $loginBtn = $('#loginButton');
     updateLoginButton(false);
     checkLogin();
     $('#createExamples').find('button').each(function(){

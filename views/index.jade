@@ -30,7 +30,7 @@ block content
             span.glyphicon.glyphicon-chevron-right(aria-hidden='false')
             span.sr-only Next
         // /.carousel
-    button(type="button", id="loginBntn") Sign In
+    button(type="button", id="loginButton") Sign In
     br
     p OneNote Create Examples:
     form(id="createExamples" name="createExamples", method="post")
@@ -52,6 +52,8 @@ block content
      br
      button(type="submit", name="submit", value="getSharedPages" disabled) Get all pages that are shared
      br
-     script.
-      window.authUrl = '!{authUrl}';
-     script(src="/javascripts/index.js")
+     button(type="submit", name="submit", value="get10SharedPages" disabled) Get 10 shared pages' metadata
+     br
+    script.
+        window.authUrl = '!{authUrl}';
+    script(src="/javascripts/index.js")
