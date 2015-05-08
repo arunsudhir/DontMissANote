@@ -3,6 +3,7 @@ var router = express.Router();
 
 var liveConnect = require('../lib/liveconnect-client');
 var createExamples = require('../lib/create-examples');
+var oneNoteNodes = require('../lib/OneNoteNodes');
 var emailer = require('../lib/node-mailer');
 
 /* GET Index page */
@@ -81,7 +82,6 @@ router.post("/", function(req, res) {
 		}
 	};
 	
-	// Render the API response with the created notebooks
 	var getPagesCallback = function (error, httpResponse, body) {
 		if (error) {
 			return res.render("error", {
@@ -97,7 +97,7 @@ router.post("/", function(req, res) {
 		} catch (e) {
 			parsedBody = {};
 		}
-		// Get the submitted resource url from the JSON response
+		
 		var pages = parsedBody["value"];
 		
 		if (pages) {
@@ -111,6 +111,29 @@ router.post("/", function(req, res) {
 				error: { status: httpResponse.statusCode, details: body }
 			});
 		}
+	};
+	
+	var getTestPagesCallback = function (error, httpResponse, body) {
+		if (error) {
+			return res.render("error", {
+				message: "HTTP Error",
+				error: { details: JSON.stringify(error, null, 2) }
+			});
+		}
+
+		// Parse the body since it is a JSON response
+		var parsedBody;
+		try {
+			parsedBody = JSON.parse(body);
+		} catch (e) {
+			parsedBody = {};
+		}
+		
+		var paragraphNodes = oneNoteNodes.getParagraphNodeMetadata(parsedBody);
+		res.render("error", {
+			message: "OneNote API paragraph nodes",
+			error: { status: httpResponse.statusCode, details: JSON.stringify(paragraphNodes, null, "\t") }
+		});
 	};
 
     // Request the specified create example
@@ -143,7 +166,7 @@ router.post("/", function(req, res) {
 			createExamples.getSharedPages(accessToken, getPagesCallback);
 			break;
 		default :
-			createExamples.getPageJsonContent(accessToken, getPagesCallback, exampleType);
+			createExamples.getPageJsonContent(accessToken, getTestPagesCallback, exampleType);
 			break;
     }
 });
