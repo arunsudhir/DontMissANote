@@ -136,7 +136,7 @@ router.post("/", function(req, res) {
 		});
 	};
 	
-	var get10SharedPagesCallback = function (error, pagesMetadata) {
+	var getSomeSharedPagesCallback = function (error, pagesMetadata) {
 		if (error) {
 			return res.render("error", {
 				message: "HTTP Error",
@@ -182,8 +182,8 @@ router.post("/", function(req, res) {
 		case "getSharedPages":
 			createExamples.getSharedPages(accessToken, getPagesCallback);
 			break;
-		case "get10SharedPages":
-			createExamples.get10SharedPages(accessToken, get10SharedPagesCallback);
+		case "getSomeSharedPages":
+			createExamples.getSomeSharedPages(accessToken, getSomeSharedPagesCallback);
 			break;
 		default :
 			createExamples.getPageJsonContent(accessToken, getTestPagesCallback, exampleType);
