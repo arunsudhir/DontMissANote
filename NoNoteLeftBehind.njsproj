@@ -38,6 +38,7 @@
     <Content Include="images\OneNoteMSAScreen.png" />
     <Compile Include="lib\create-examples.js" />
     <Compile Include="lib\liveconnect-client.js" />
+    <Compile Include="lib\MetadataFilters.js" />
     <Compile Include="lib\OneNoteApi.js" />
     <Compile Include="lib\sendgrid-mailer.js" />
     <Compile Include="lib\OneNoteNodes.js" />
