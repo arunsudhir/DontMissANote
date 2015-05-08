@@ -64,6 +64,10 @@ function ProcessSuccesfulApiResponse(passedObject) {
 }
 
 
+function deleteKeywords(compId) {
+	$(compId).hide();
+}
+
 function updateButtons() {
     $visibleKeywordCount = 0;
     $('#keywordList').hide();
@@ -98,6 +102,11 @@ function updateButtons() {
         searchTerms.push(txt); // We'll need to remember this when the user clicks "go"
         $(tt).text(txt);
     });
+
+	$(".delete_button").click(function(event) {
+        $(event.target).closest('li').hide();
+		$visibleKeywordCount--;
+	});
 }
 
 function disableCreateButtons(disabled) {
