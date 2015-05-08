@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var http = require('http');
 
 var routes = require('./routes/index');
+var registerTermsRoutes = require('./routes/registerTerms');
 var callback = require('./routes/callback');
 
 var app = express();
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.post('/registerTerms', registerTermsRoutes.registerTerms);
 app.use('/callback', callback);
 
 // catch 404 and forwarding to error handler

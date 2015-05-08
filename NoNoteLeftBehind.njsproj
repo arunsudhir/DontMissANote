@@ -21,6 +21,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Compile Include="routes\registerTerms.js" />
     <Content Include="public\stylesheets\bootstrap-theme.min.css" />
     <Content Include="public\stylesheets\bootstrap.min.css" />
     <Content Include="public\stylesheets\carousel.css" />
