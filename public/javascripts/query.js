@@ -58,7 +58,7 @@ function ProcessFailedApiResponse(xmlHttpRequest, textStatus, errorThrown) {
 }
 
 function ProcessSuccesfulApiResponse(passedObject) {
-    alert('Successfully processed API response' + passedObject);
+    alert('Successfully processed API response + // TODO: What should we do in the UI after successfully registering the terms? ' + passedObject);
     $('#containerActive').hide();
    // TODO: What should we do after successfully registering the terms?
 }
