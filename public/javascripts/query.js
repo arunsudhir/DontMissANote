@@ -60,7 +60,7 @@ function updateButtons() {
         $('#signout').click();
     });
     $searchBtn.on('click', function () {
-        $('#searchBtn').hide();
+        $('#keywordList').hide();
         $('#containerActive').show();
     });
     
