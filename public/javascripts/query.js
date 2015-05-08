@@ -54,6 +54,7 @@ function deleteAllCookies() {
 
 function updateButtons() {
     $visibleKeywordCount = 0;
+	$('#keywordList').hide();
     $loginBtn.on('click', function () {
         deleteAllCookies();
         $('#signout').click();
@@ -65,6 +66,9 @@ function updateButtons() {
     
     $keyBtn.on('click', function () {
         $visibleKeywordCount++;
+        if ($visibleKeywordCount === 1) {
+            $('#keywordList').show();
+        }
         var listelem = '#li' + $visibleKeywordCount.toString();
 	    var tt = listelem + 'Text';
         $(listelem).show();
