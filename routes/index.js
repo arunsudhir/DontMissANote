@@ -169,7 +169,10 @@ router.post("/", function(req, res) {
             break;
         case 'email':
            sendgridEmailer.sendEmail("hidex2015@outlook.com", "Hi <b> This mail brought to you by hackathon<b>", "Yo check this out");
-	        break;
+            break;
+        case 'testUserInfo':
+            liveConnect.getUserInfo(accessToken, createResultCallback);
+            break;
 		case "getNotebooks":
 			createExamples.getNotebooks(accessToken, getNotebooksCallback);
 			break;
