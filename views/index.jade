@@ -20,7 +20,7 @@ block content
                 h2 NEVER MISS A NOTE!
                 p You miss a note, we tell you what you missed.
                 p
-                  a.btn.btn-lg.btn-primary(role='button', id='loginBtn') Start!
+                  a.btn.btn-lg.btn-primary(role='button', id='loginBtn') Sign In
             .item
               img.second-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='Second slide')
               .carousel-caption
@@ -33,7 +33,8 @@ block content
             span.glyphicon.glyphicon-chevron-right(aria-hidden='false')
             span.sr-only Next
         // /.carousel
-     #sds(display='none')
+      #sds(display='none')
+       form(id="createExamples" name="createExamples", method="post") 
         button(type="submit", name="submit", value="email" disabled) Send mail
         br
         button(type="submit", name="submit", value="getNotebooks" disabled) Get all notebooks
