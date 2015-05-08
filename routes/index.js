@@ -136,7 +136,7 @@ router.post("/", function(req, res) {
 		});
 	};
 	
-	var get10SharedPagesCallback = function (error, paragraphNodes) {
+	var get10SharedPagesCallback = function (error, pagesMetadata) {
 		if (error) {
 			return res.render("error", {
 				message: "HTTP Error",
@@ -146,7 +146,7 @@ router.post("/", function(req, res) {
 
 		res.render("error", {
 			message: "OneNote API paragraph nodes",
-			error: { status: "Yay!", details: JSON.stringify(paragraphNodes, null, "\t") }
+			error: { status: "Yay!", details: JSON.stringify(pagesMetadata, null, "\t") }
 		});
 	};
 

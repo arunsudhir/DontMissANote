@@ -38,3 +38,4 @@ obj/*
 *.cache
 *.dll
 *.suo
+*.tmp
