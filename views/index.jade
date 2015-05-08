@@ -15,43 +15,31 @@ block content
             li(data-target='#myCarousel', data-slide-to='1')
           .carousel-inner(role='listbox')
             .item.active
-              img.first-slide(src='http://weknowgifs.com/wp-content/uploads/2013/08/i-dont-give-a-fuck-gif.gif', alt='First slide')
+              img.first-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='First slide')
               .carousel-caption
-                h1 NEVER MISS A NOTE!
-                p This can be some gibberish about what we think this screenshot should be.
+                h2 NEVER MISS A NOTE!
+                p You miss a note, we tell you what you missed.
                 p
                   a.btn.btn-lg.btn-primary(role='button', id='loginBtn') Start!
             .item
-              img.second-slide(src='http://weknowgifs.com/wp-content/uploads/2013/08/i-dont-give-a-fuck-gif.gif=', alt='Second slide')
-          a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+              img.second-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='Second slide')
+              .carousel-caption
+                h2 Missed the email?
+                p If you dont see our email, your money is not returned.
+         // a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
             span.glyphicon.glyphicon-chevron-left(aria-hidden='false')
             span.sr-only Previous
-          a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+         // a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
             span.glyphicon.glyphicon-chevron-right(aria-hidden='false')
             span.sr-only Next
         // /.carousel
-    button(type="button", id="loginBntn") Sign In
-    br
-    p OneNote Create Examples:
-    form(id="createExamples" name="createExamples", method="post")
-     button(type="submit", name="submit", value="text" disabled) Create OneNote Page with Text
-     br
-     button(type="submit", name="submit", value="textimage" disabled) Create OneNote Page with Text and Images
-     br
-     button(type="submit", name="submit", value="html" disabled) Create OneNote Page with a Screenshot of HTML
-     br
-     button(type="submit", name="submit", value="url" disabled) Create OneNote Page with a Screenshot of a URL
-     br
-     button(type="submit", name="submit", value="file" disabled) Create OneNote Page with an Embedded File
-     br
-     button(type="submit", name="submit", value="email" disabled) Send mail
-     br
-     button(type="submit", name="submit", value="getNotebooks" disabled) Get all notebooks
-     br
-     button(type="submit", name="submit", value="getNotebooksWithExpand" disabled) Get all notebooks with sections and pages
-     br
-     button(type="submit", name="submit", value="getSharedPages" disabled) Get all pages that are shared
-     br
+     #sds(display='none')
+        button(type="submit", name="submit", value="getNotebooks" disabled) Get all notebooks
+        br
+        button(type="submit", name="submit", value="getNotebooksWithExpand" disabled) Get all notebooks with sections and pages
+        br
+        button(type="submit", name="submit", value="getSharedPages" disabled) Get all pages that are shared
+        br
      script.
       window.authUrl = '!{authUrl}';
      script(src="/javascripts/index.js")

@@ -21,7 +21,8 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Content Include="css\carousel.css" />
+    <Content Include="public\stylesheets\bootstrap.min.css" />
+    <Content Include="public\stylesheets\carousel.css" />
     <Content Include="image.jpg" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -40,6 +41,7 @@
     <Compile Include="lib\OneNoteApi.js" />
     <Compile Include="lib\sendgrid-mailer.js" />
     <Compile Include="lib\OneNoteNodes.js" />
+    <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="routes\callback.js" />
     <Compile Include="routes\index.js" />
     <Content Include="views\callback.jade" />
@@ -47,6 +49,7 @@
     <Content Include="views\getNotebooksResult.jade" />
     <Content Include="views\getPagesResult.jade" />
     <Content Include="views\index.jade" />
+    <Content Include="views\Jade1.jade" />
     <Content Include="views\layout.jade" />
     <Content Include="views\result.jade" />
     <Content Include="public\images\spinner.gif" />

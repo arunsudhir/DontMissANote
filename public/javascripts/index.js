@@ -98,12 +98,14 @@ function checkLogin() {
             disableLoginButton(false);
             isLoggedIn = true;
             updateLoginButton(isLoggedIn);
+            $('#sds').show();
         }
     } else {
         if (isLoggedIn) {
             disableLoginButton(false);
             isLoggedIn = false;
             updateLoginButton(isLoggedIn);
+            $('#sds').hide();
         }
     }
 }
