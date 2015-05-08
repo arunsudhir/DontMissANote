@@ -1,0 +1,48 @@
+﻿extends layout
+
+block content
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href='#') Don&apos;t Miss A Note
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right            
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                !{SignedInUser}
+                span.caret
+              ul.dropdown-menu(role='menu')
+                li
+                 center
+                  button.btn.btn-danger(type='submit', id='loginButton') Sign Out 
+    .jumbotron
+      .container
+        form.form-signin
+          h4.form-signin-heading Please enter the keywords that you want us to look for
+              br
+              br
+              label.sr-only(for='inputKeywords') Keywords:
+              input#inputKeywords.form-control(type='text', placeholder='Enter your keywords here..', required='', autofocus='')
+              br
+              button#searchBtn.btn.btn-primary.btn-block(type='button') Look for these in my notes
+        center
+         #containerActive
+          progress.progress-striped.active
+           .bar(style='width: 0%;')
+          p Please sip your cup of coffee while we look for the relevant notes... We promise this won&apos;t take long
+        form(id="createExamples" name="createExamples", method="post") 
+         button(type="submit", name="submit", value="email" disabled) Send mail
+         br
+         button(type="submit", name="submit", value="getNotebooks" ) Get all notebooks
+         br
+         button(type="submit", name="submit", value="getNotebooksWithExpand" ) Get all notebooks with sections and pages
+         br
+         button(type="submit", name="submit", value="getSharedPages" ) Get all pages that are shared
+         br
+         button(type="submit", name="submit", value="getLastDayPageMetadata" ) Get metadata for pages edited in the last day
+         br
+         button(type="submit", name="submit", value="signOut", style='visibility:hidden', id='signout')
+         br
+         button(type="submit", name="submit", value="getTermMetadata") Get term metadata for "disney" and "hackaton" terms
+         br
+        script(src="/javascripts/query.js")

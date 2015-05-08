@@ -82,7 +82,7 @@ function updateLoginButton(isLoggedIn) {
     $loginBtn.text(isLoggedIn ? 'Sign Out' : 'Sign In');
     $loginBtn.off('click');
     $loginBtn.on('click', function () {
-        disableLoginButton(true);
+       // disableLoginButton(true);
         if (isLoggedIn) {
             deleteAllCookies();
         } else {
@@ -95,19 +95,53 @@ function updateLoginButton(isLoggedIn) {
 function checkLogin() {
     if (getCookie("access_token")) {
         if (!isLoggedIn) {
-            disableLoginButton(false);
+            //disableLoginButton(false);
             isLoggedIn = true;
             updateLoginButton(isLoggedIn);
             $('#sds').show();
+            $('#userInfo').click();
         }
     } else {
+        $('#sds').hide();
         if (isLoggedIn) {
-            disableLoginButton(false);
+            //disableLoginButton(false);
             isLoggedIn = false;
             updateLoginButton(isLoggedIn);
-            $('#sds').hide();
         }
     }
 }
+
+// Render the API response with the created links or with error output
+var userInfoResultCallback = function (error, httpResponse, body) {
+    if (error) {
+        return res.render("error", {
+            message: "HTTP Error",
+            error: { details: JSON.stringify(error, null, 2) }
+        });
+    }
+    
+    // Parse the body since it is a JSON response
+    var parsedBody;
+    try {
+        parsedBody = JSON.parse(body);
+    } catch (e) {
+        parsedBody = {};
+    }
+    // Get the submitted resource url from the JSON response
+    var resourceUrl = parsedBody["links"] ? parsedBody["links"]["oneNoteWebUrl"]["href"] : null;
+    
+    if (resourceUrl) {
+        res.render("result", {
+            title: "OneNote API Result",
+            body: body,
+            resourceUrl: resourceUrl
+        });
+    } else {
+        res.render("error", {
+            message: "OneNote API Unexpected Result",
+            error: { status: httpResponse.statusCode, details: body }
+        });
+    }
+};
 
 window.setInterval(checkLogin, 1000);

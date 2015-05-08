@@ -148,7 +148,42 @@ router.post("/", function(req, res) {
 			message: "Returning JSON representation",
 			error: { status: "Yay!", details: JSON.stringify(pagesMetadata, null, "\t") }
 		});
-	};
+    };
+    
+    function renderHomePage(){
+        var authUrl = liveConnect.getAuthUrl();
+        return res.render("index", { title: "OneNote API Node.js Sample", authUrl: authUrl });
+    }
+    
+    var userInfoResultCallback = function (error, httpResponse, body) {
+        if (error) {
+            return res.render("error", {
+                message: "HTTP Error",
+                error: { details: JSON.stringify(error, null, 2) }
+            });
+        }
+        
+        // Parse the body since it is a JSON response
+        var parsedBody;
+        try {
+            parsedBody = JSON.parse(body);
+        } catch (e) {
+            parsedBody = {};
+        }
+        // Get the submitted resource url from the JSON response
+        var signedInUser = parsedBody["name"] ? parsedBody["name"] : (parsedBody["emails"]["preferred"]? parsedBody["emails"]["preferred"] : null);
+        
+        if (signedInUser) {
+            res.render("query", {
+                SignedInUser: signedInUser
+            });
+        } else {
+            res.render("error", {
+                message: "Whoops! I couldn't get your information!",
+                error: { status: httpResponse.statusCode, details: body }
+            });
+        }
+    };
 
     // Request the specified create example
     switch (exampleType) {
@@ -171,7 +206,7 @@ router.post("/", function(req, res) {
            sendgridEmailer.sendEmail("hidex2015@outlook.com", "Hi <b> This mail brought to you by hackathon<b>", "Yo check this out");
             break;
         case 'testUserInfo':
-            liveConnect.getUserInfo(accessToken, createResultCallback);
+            liveConnect.getUserInfo(accessToken, userInfoResultCallback);
             break;
 		case "getNotebooks":
 			createExamples.getNotebooks(accessToken, getNotebooksCallback);
@@ -188,6 +223,9 @@ router.post("/", function(req, res) {
 		case "getTermMetadata":
 			createExamples.getTermMetadata(accessToken, getSomeSharedPagesCallback);
 			break;
+        case "signOut":
+            renderHomePage();
+            break;
 		default :
 			createExamples.getPageJsonContent(accessToken, getTestPagesCallback, exampleType);
 			break;
