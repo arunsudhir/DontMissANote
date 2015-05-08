@@ -1,8 +1,10 @@
-﻿var $loginBtn;
+﻿var $loginBtn, $searchBtn;
 
 $(function () {
+    $('#containerActive').hide();
     $loginBtn = $('#loginButton');
-    updateLoginButton();
+    $searchBtn = $('#searchBtn');
+    updateButtons();
     $('#createExamples').find('button').each(function () {
         $(this).on('mouseup', function (e) {
             $(e.target).after('<img src="images/spinner.gif" style="margin-left: 5px;"/>');
@@ -10,6 +12,18 @@ $(function () {
         });
     });
 });
+
+var progress = setInterval(function () {
+    var $bar = $('.bar');
+    
+    if ($bar.width() >= 400) {
+        clearInterval(progress);
+        $('.progress').removeClass('active');
+    } else {
+        $bar.width($bar.width() + 40);
+    }
+    $bar.text($bar.width() / 4 + "%");
+}, 800);
 
 function getCookie(name) {
     var cookies = document.cookie;
@@ -37,10 +51,14 @@ function deleteAllCookies() {
     }
 }
 
-function updateLoginButton() {
+function updateButtons() {
     $loginBtn.on('click', function () {
         deleteAllCookies();
         $('#signout').click();
+    });
+    $searchBtn.on('click', function () {
+        $('#searchBtn').hide();
+        $('#containerActive').show();
     });
 }
 
