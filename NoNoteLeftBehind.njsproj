@@ -43,6 +43,7 @@
     <Compile Include="lib\OneNoteApi.js" />
     <Compile Include="lib\sendgrid-mailer.js" />
     <Compile Include="lib\OneNoteNodes.js" />
+    <Compile Include="lib\vash-worker.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
     <Compile Include="public\javascripts\query.js" />
     <Compile Include="routes\callback.js" />
