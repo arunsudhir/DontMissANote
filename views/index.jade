@@ -5,6 +5,9 @@ block content
       .container
         .navbar-header
           a.navbar-brand(href='#') Don&apos;t Miss A Note
+        #navbar.navbar-collapse.collapse
+         form.navbar-form.navbar-right
+          button.btn.btn-success(type='submit', id='loginButton') Sign in
     //Carousel
     .jumbotron
       .container
@@ -20,7 +23,7 @@ block content
                 h2 NEVER MISS A NOTE!
                 p You miss a note, we tell you what you missed.
                 p
-                  a.btn.btn-lg.btn-primary(role='button', id='loginButton') Sign In
+                  //a.btn.btn-lg.btn-primary(role='button', id='loginButton') Sign In
             .item
               img.second-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='Second slide')
               .carousel-caption
