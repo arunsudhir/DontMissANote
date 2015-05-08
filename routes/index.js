@@ -145,7 +145,7 @@ router.post("/", function(req, res) {
 		}
 
 		res.render("error", {
-			message: "OneNote API paragraph nodes",
+			message: "Returning JSON representation",
 			error: { status: "Yay!", details: JSON.stringify(pagesMetadata, null, "\t") }
 		});
 	};
@@ -184,6 +184,9 @@ router.post("/", function(req, res) {
 			break;
 		case "getLastDayPageMetadata":
 			createExamples.getLastDayPageMetadata(accessToken, getSomeSharedPagesCallback);
+			break;
+		case "getTermMetadata":
+			createExamples.getTermMetadata(accessToken, getSomeSharedPagesCallback);
 			break;
 		default :
 			createExamples.getPageJsonContent(accessToken, getTestPagesCallback, exampleType);
