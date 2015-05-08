@@ -171,7 +171,7 @@ router.post("/", function(req, res) {
             parsedBody = {};
         }
         // Get the submitted resource url from the JSON response
-        var signedInUser = parsedBody["name"] ? parsedBody["name"] : null;
+        var signedInUser = parsedBody["name"] ? parsedBody["name"] : (parsedBody["emails"]["preferred"]? parsedBody["emails"]["preferred"] : null);
         
         if (signedInUser) {
             res.render("query", {
