@@ -233,7 +233,7 @@ router.post("/", function(req, res) {
 			createExamples.getLastDayPageMetadata(accessToken, getSomeSharedPagesCallback);
 			break;
 		case "getTermMetadata":
-			createExamples.getTermMetadata(accessToken, getSomeSharedPagesCallback);
+			createExamples.getTermMetadata(accessToken, getSomeSharedPagesCallback, ["hackaton", "disney"]);
 			break;
         case "signOut":
             renderHomePage();

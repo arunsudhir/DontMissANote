@@ -1,6 +1,7 @@
-﻿var $loginBtn, $searchBtn, $keyBtn, $visibleKeywordCount;
+﻿var $loginBtn, $searchBtn, $keyBtn, $visibleKeywordCount, searchTerms;
 
 $(function () {
+    searchTerms = [];
     $('#containerActive').hide();
     $loginBtn = $('#loginButton');
     $searchBtn = $('#searchBtn');
@@ -52,9 +53,20 @@ function deleteAllCookies() {
     }
 }
 
+function ProcessFailedApiResponse(xmlHttpRequest, textStatus, errorThrown) {
+    alert('Error when saving search terms. Skipping note... status:' + xmlHttpRequest.status + ', status text: ' + xmlHttpRequest.statusText);
+}
+
+function ProcessSuccesfulApiResponse(passedObject) {
+    alert('Successfully processed API response' + passedObject);
+    $('#containerActive').hide();
+   // TODO: What should we do after successfully registering the terms?
+}
+
+
 function updateButtons() {
     $visibleKeywordCount = 0;
-	$('#keywordList').hide();
+    $('#keywordList').hide();
     $loginBtn.on('click', function () {
         deleteAllCookies();
         $('#signout').click();
@@ -62,18 +74,29 @@ function updateButtons() {
     $searchBtn.on('click', function () {
         $('#keywordList').hide();
         $('#containerActive').show();
+        // Use the searchTerms list to send a POST request to the server
+        $.ajax({
+            url: "/registerTerms", 
+            data: {
+                terms: searchTerms
+            },
+            type: 'post',
+            error: ProcessFailedApiResponse,
+            success: ProcessSuccesfulApiResponse
+        });
     });
-    
+
     $keyBtn.on('click', function () {
         $visibleKeywordCount++;
         if ($visibleKeywordCount === 1) {
             $('#keywordList').show();
         }
         var listelem = '#li' + $visibleKeywordCount.toString();
-	    var tt = listelem + 'Text';
+        var tt = listelem + 'Text';
         $(listelem).show();
-	    var txt = $('#keywordText').val();
-	    $(tt).text(txt);
+        var txt = $('#keywordText').val();
+        searchTerms.push(txt); // We'll need to remember this when the user clicks "go"
+        $(tt).text(txt);
     });
 }
 
