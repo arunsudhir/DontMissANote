@@ -172,10 +172,22 @@ router.post("/", function(req, res) {
         }
         // Get the submitted resource url from the JSON response
         var signedInUser = parsedBody["name"] ? parsedBody["name"] : (parsedBody["emails"]["preferred"]? parsedBody["emails"]["preferred"] : null);
-        
         if (signedInUser) {
-            res.render("query", {
-                SignedInUser: signedInUser
+            var image = null;
+            liveConnect.getUserPic(accessToken, function (error, httpResponse, body) {
+                if (!error) {
+                    image = httpResponse.headers['content-location'];
+                    res.render("query", {
+                        SignedInUser: signedInUser,
+                        SignedInUserPic: image
+                    });
+                } 
+                else {
+                    res.render("error", {
+                        message: "Whoops! I couldn't get your picture!",
+                        error: { status: httpResponse.statusCode, details: body }
+                    });
+                    }
             });
         } else {
             res.render("error", {
