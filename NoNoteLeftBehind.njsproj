@@ -43,6 +43,7 @@
     <Compile Include="lib\sendgrid-mailer.js" />
     <Compile Include="lib\OneNoteNodes.js" />
     <Compile Include="public\javascripts\bootstrap.min.js" />
+    <Compile Include="public\javascripts\query.js" />
     <Compile Include="routes\callback.js" />
     <Compile Include="routes\index.js" />
     <Content Include="views\callback.jade" />
@@ -52,6 +53,7 @@
     <Content Include="views\index.jade" />
     <Content Include="views\Jade1.jade" />
     <Content Include="views\layout.jade" />
+    <Content Include="views\query.jade" />
     <Content Include="views\result.jade" />
     <Content Include="public\images\spinner.gif" />
     <Compile Include="public\javascripts\index.js" />
