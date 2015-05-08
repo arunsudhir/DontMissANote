@@ -56,10 +56,10 @@ block content
                   button.btn.btn-primary(id='searchBtn') Go!
         center
          #containerActive
-          progress.progress-striped.active
+          progress#prgBar.progress-striped.active
            .bar(style='width: 0%;')
-          p Please sip your cup of coffee while we look for the relevant notes... We promise this won&apos;t take long
-        form(id="createExamples" name="createExamples", method="post") 
+          p#status Please sip your cup of coffee while we look for the relevant notes... 
+        form(id="createExamples" name="createExamples", method="post" style='display:none') 
          button(type="submit", name="submit", value="email" disabled) Send mail
          br
          button(type="submit", name="submit", value="getNotebooks" ) Get all notebooks

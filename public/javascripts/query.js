@@ -1,4 +1,6 @@
 ﻿var $loginBtn, $searchBtn, $keyBtn, $visibleKeywordCount, searchTerms;
+var doneTxt = "And we are done!";
+var inProgressText = "Please sip your cup of coffee while we look for the relevant notes... ";
 
 $(function () {
     searchTerms = [];
@@ -59,8 +61,11 @@ function ProcessFailedApiResponse(xmlHttpRequest, textStatus, errorThrown) {
 
 function ProcessSuccesfulApiResponse(passedObject) {
     alert('Successfully processed API response + // TODO: What should we do in the UI after successfully registering the terms? ' + passedObject);
-    $('#containerActive').hide();
-   // TODO: What should we do after successfully registering the terms?
+    $('#prgBar').hide();
+    $('#status').text('And we are done!');
+    searchTerms.clear();
+	searchTerms.last().remove();
+	// TODO: What should we do after successfully registering the terms?
 }
 
 
@@ -76,7 +81,7 @@ function updateButtons() {
         $('#signout').click();
     });
     $searchBtn.on('click', function () {
-        $('#keywordList').hide();
+        //$('#keywordList').hide();
         $('#containerActive').show();
         // Use the searchTerms list to send a POST request to the server
         $.ajax({
@@ -94,6 +99,7 @@ function updateButtons() {
         $visibleKeywordCount++;
         if ($visibleKeywordCount === 1) {
             $('#keywordList').show();
+            $('#containerActive').hide();
         }
         var listelem = '#li' + $visibleKeywordCount.toString();
         var tt = listelem + 'Text';
