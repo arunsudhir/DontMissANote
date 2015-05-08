@@ -72,7 +72,7 @@ function updateButtons() {
         var listelem = '#li' + $visibleKeywordCount.toString();
 	    var tt = listelem + 'Text';
         $(listelem).show();
-	    var txt = $('#keywordText').text();
+	    var txt = $('#keywordText').val();
 	    $(tt).text(txt);
     });
 }
