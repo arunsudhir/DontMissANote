@@ -171,18 +171,16 @@ router.post("/", function(req, res) {
             parsedBody = {};
         }
         // Get the submitted resource url from the JSON response
-        var resourceUrl = parsedBody["links"] ? parsedBody["links"]["oneNoteWebUrl"]["href"] : null;
+        var signedInUser = parsedBody["name"] ? parsedBody["name"] : null;
         
-        if (resourceUrl) {
-            res.render("result", {
-                title: "OneNote API Result",
-                body: body,
-                resourceUrl: resourceUrl
+        if (signedInUser) {
+            res.render("query", {
+                SignedInUser: signedInUser
             });
         } else {
-            res.render("query", {
-                SignedInUser: "OneNote API Unexpected Result"
-                //error: { status: httpResponse.statusCode, details: body }
+            res.render("error", {
+                message: "Whoops! I couldn't get your information!",
+                error: { status: httpResponse.statusCode, details: body }
             });
         }
     };
