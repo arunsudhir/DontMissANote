@@ -182,8 +182,8 @@ router.post("/", function(req, res) {
 		case "getSharedPages":
 			createExamples.getSharedPages(accessToken, getPagesCallback);
 			break;
-		case "getSomeSharedPages":
-			createExamples.getSomeSharedPages(accessToken, getSomeSharedPagesCallback);
+		case "getLastDayPageMetadata":
+			createExamples.getLastDayPageMetadata(accessToken, getSomeSharedPagesCallback);
 			break;
 		default :
 			createExamples.getPageJsonContent(accessToken, getTestPagesCallback, exampleType);
