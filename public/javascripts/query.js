@@ -1,9 +1,10 @@
-﻿var $loginBtn, $searchBtn;
+﻿var $loginBtn, $searchBtn, $keyBtn, $visibleKeywordCount;
 
 $(function () {
     $('#containerActive').hide();
     $loginBtn = $('#loginButton');
     $searchBtn = $('#searchBtn');
+    $keyBtn = $('#addKeywordBtn');
     updateButtons();
     $('#createExamples').find('button').each(function () {
         $(this).on('mouseup', function (e) {
@@ -52,6 +53,7 @@ function deleteAllCookies() {
 }
 
 function updateButtons() {
+    $visibleKeywordCount = 0;
     $loginBtn.on('click', function () {
         deleteAllCookies();
         $('#signout').click();
@@ -59,6 +61,15 @@ function updateButtons() {
     $searchBtn.on('click', function () {
         $('#searchBtn').hide();
         $('#containerActive').show();
+    });
+    
+    $keyBtn.on('click', function () {
+        $visibleKeywordCount++;
+        var listelem = '#li' + $visibleKeywordCount.toString();
+	    var tt = listelem + 'Text';
+        $(listelem).show();
+	    var txt = $('#keywordText').text();
+	    $(tt).text(txt);
     });
 }
 
