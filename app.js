@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -16,10 +17,14 @@ app.set('view engine', 'jade');
 
 app.use(bodyParser());
 app.use(cookieParser());
+app.use(session({
+    secret: '1234567890QWERTY',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-// TODO: Remove global variable "SignedInUser" from Index.js and hook this up properly
 // app.post('/registerTerms', registerTermsRoutes.registerTerms);
 app.use('/callback', callback);
 

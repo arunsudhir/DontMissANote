@@ -6,7 +6,6 @@ var createExamples = require('../lib/create-examples');
 var oneNoteNodes = require('../lib/OneNoteNodes');
 var sendgridEmailer = require('../lib/sendgrid-mailer.js');
 var vasher = require('../lib/vash-worker.js');
-var signedInUserEmail = "onecap@outlook.com";
 
 /* GET Index page */
 router.get("/", function(req, res) {
@@ -145,13 +144,6 @@ router.post("/", function(req, res) {
 				error: { details: JSON.stringify(error, null, 2) }
 			});
 		}
-
-        var html = vasher.composeMailBody(pagesMetadata);
-            res.render("error", {
-                message: "Returning JSON representation",
-                error: { status: "Yay we're sending you a mail alert now... Grab a coffee and check your inbox!", details : JSON.stringify(pagesMetadata, null, "\t")}
-        });
-	    sendgridEmailer.sendEmail(signedInUserEmail, html, "Don't miss a shared note: Alerts");
 	};
     
     function renderHomePage(){
@@ -159,7 +151,7 @@ router.post("/", function(req, res) {
         return res.render("index", { title: "OneNote API Node.js Sample", authUrl: authUrl });
     }
     
-    var userInfoResultCallback = function (error, httpResponse, body) {
+    var userInfoResultCallback = function (error, req, httpResponse, body) {
         if (error) {
             return res.render("error", {
                 message: "HTTP Error",
@@ -176,8 +168,8 @@ router.post("/", function(req, res) {
         }
         // Get the submitted resource url from the JSON response
         var signedInUser = parsedBody["name"] ? parsedBody["name"] : (parsedBody["emails"]["preferred"]? parsedBody["emails"]["preferred"] : null);
-        signedInUserEmail = parsedBody["emails"]["preferred"]; // TODO: put this in a cookie instead of a global variable. Grrr...
-        
+        req.session.email = parsedBody["emails"]["preferred"]; 
+
         if (signedInUser) {
             var image = null;
             liveConnect.getUserPic(accessToken, function (error, httpResponse, body) {
@@ -224,7 +216,7 @@ router.post("/", function(req, res) {
            sendgridEmailer.sendEmail("hidex2015@outlook.com", "Hi <b> This mail brought to you by hackathon<b>", "Yo check this out");
             break;
         case 'testUserInfo':
-            liveConnect.getUserInfo(accessToken, userInfoResultCallback);
+            liveConnect.getUserInfo(accessToken, req, userInfoResultCallback);
             break;
 		case "getNotebooks":
 			createExamples.getNotebooks(accessToken, getNotebooksCallback);
@@ -254,17 +246,18 @@ router.post("/", function(req, res) {
 router.post("/registerTerms", function (req, res) {
     var terms = req.body.terms;
     var accessToken = req.cookies["access_token"];
-    
-    console.log("Fetching terms metadata for " + JSON.stringify(terms));
+    var useremail = req.session.email;
+
+    console.log("Fetching terms metadata for " + JSON.stringify(terms) + " for user " + useremail + " and session id: " + req.session.id );
     
     createExamples.getTermMetadata(accessToken, function (error, termsMetadata) {
-        console.log("Successfully fetched terms metadata.");
+        console.log("Successfully fetched terms metadata." + " for user " + useremail + " and session id: " + req.session.id );
         
         var html = vasher.composeMailBody(termsMetadata);
-        console.log("Successfully converted termsMetadata into html");
+        console.log("Successfully converted termsMetadata into html" + " for user " + useremail + " and session id: " + req.session.id );
         
-        sendgridEmailer.sendEmail(signedInUserEmail, html, "Don't miss a shared note: Alerts");
-        console.log("Successfully sent mail via sendGrid. Done!");
+        sendgridEmailer.sendEmail(useremail, html, "OneNote Daily Shared Notes Alerts");
+        console.log("Successfully sent mail via sendGrid. Done!" + " for user " + useremail + " and session id: " + req.session.id );
     }, terms);
 
     return res.status(200).json(terms);
