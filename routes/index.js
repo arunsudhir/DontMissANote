@@ -151,7 +151,7 @@ router.post("/", function(req, res) {
                 message: "Returning JSON representation",
                 error: { status: "Yay we're sending you a mail alert now... Grab a coffee and check your inbox!", details : JSON.stringify(pagesMetadata, null, "\t")}
         });
-	    sendgridEmailer.sendEmail(signedInUserEmail, html, "Don't miss a shared note: Alerts");
+	    sendgridEmailer.sendEmail(signedInUserEmail, html, "OneNote Daily Shared Notes Alerts");
 	};
     
     function renderHomePage(){
@@ -263,7 +263,7 @@ router.post("/registerTerms", function (req, res) {
         var html = vasher.composeMailBody(termsMetadata);
         console.log("Successfully converted termsMetadata into html");
         
-        sendgridEmailer.sendEmail(signedInUserEmail, html, "Don't miss a shared note: Alerts");
+        sendgridEmailer.sendEmail(signedInUserEmail, html, "OneNote Daily Shared Notes Alerts");
         console.log("Successfully sent mail via sendGrid. Done!");
     }, terms);
 
