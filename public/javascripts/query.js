@@ -60,7 +60,7 @@ function ProcessFailedApiResponse(xmlHttpRequest, textStatus, errorThrown) {
 }
 
 function ProcessSuccesfulApiResponse(passedObject) {
-    alert('Successfully processed API response + // TODO: What should we do in the UI after successfully registering the terms? ' + passedObject);
+    //alert('Successfully processed API response + // TODO: What should we do in the UI after successfully registering the terms? ' + passedObject);
     $('#prgBar').hide();
     $('#status').text($doneTxt);
     $('.list-group-item').hide();
