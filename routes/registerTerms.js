@@ -1,5 +1,6 @@
 ﻿var createExamples = require('../lib/create-examples');
-var signedInUserEmail;
+var vasher = require('../lib/vash-worker.js');
+var sendgridEmailer = require('../lib/sendgrid-mailer.js');
 
 // POST ~/registerTerms - this returns asyncrhonously
 exports.registerTerms = function (req, res) {
