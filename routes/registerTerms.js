@@ -19,7 +19,7 @@ var signedInUserEmail;
 //        var html = vasher.composeMailBody(termsMetadata);
 //        console.log("Successfully converted termsMetadata into html");
 
-//        sendgridEmailer.sendEmail(signedInUserEmail, html, "Don't miss a shared note: Alerts");
+//        sendgridEmailer.sendEmail(signedInUserEmail, html, "OneNote Daily Shared Notes Alerts");
 //        console.log("Successfully sent mail via sendGrid. Done!");
 
 //        // TODO: we should return before this callback completes (to be async). Leaving as is for testing
