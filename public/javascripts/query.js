@@ -110,6 +110,7 @@ function updateButtons() {
         var txt = $('#keywordText').val();
         searchTerms.push(txt); // We'll need to remember this when the user clicks "go"
         $(tt).text(txt);
+	    $('#keywordText').val("");
     });
 
 	$(".delete_button").click(function(event) {
