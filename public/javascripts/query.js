@@ -70,6 +70,21 @@ function ProcessSuccesfulApiResponse(passedObject) {
 	// TODO: What should we do after successfully registering the terms?
 }
 
+function clickOnPlusButton() {
+    $visibleKeywordCount++;
+    if ($visibleKeywordCount === 1) {
+        $('#keywordList').show();
+        $('#containerActive').hide();
+    }
+    var listelem = '#li' + $visibleKeywordCount.toString();
+    var tt = listelem + 'Text';
+    $(listelem).show();
+    var txt = $('#keywordText').val();
+    searchTerms.push(txt); // We'll need to remember this when the user clicks "go"
+    $(tt).text(txt);
+    $('#keywordText').val("");
+    $('#keywordText').focus(); // move the cursor to the textbox
+}
 
 function deleteKeywords(compId) {
     $(compId).hide();
@@ -83,6 +98,7 @@ function updateButtons() {
         deleteAllCookies();
         $('#signout').click();
     });
+
     $searchBtn.on('click', function () {
         //$('#keywordList').hide();
         $('#containerActive').show();
@@ -97,20 +113,17 @@ function updateButtons() {
             success: ProcessSuccesfulApiResponse
         });
     });
+    
+    $('#keywordText').keydown(function (event) {
+        // check for enter - add the item if user clicked that button
+        if (event.which === 13) {
+            event.preventDefault();
+            clickOnPlusButton();
+        }
+    });
 
     $keyBtn.on('click', function () {
-        $visibleKeywordCount++;
-        if ($visibleKeywordCount === 1) {
-            $('#keywordList').show();
-            $('#containerActive').hide();
-        }
-        var listelem = '#li' + $visibleKeywordCount.toString();
-        var tt = listelem + 'Text';
-        $(listelem).show();
-        var txt = $('#keywordText').val();
-        searchTerms.push(txt); // We'll need to remember this when the user clicks "go"
-        $(tt).text(txt);
-	    $('#keywordText').val("");
+	    clickOnPlusButton();
     });
 
 	$(".delete_button").click(function(event) {
