@@ -66,7 +66,7 @@ function ProcessSuccesfulApiResponse(passedObject) {
     $('.list-group-item').hide();
     $('#li0').show();
 	$('#keywordList').hide();
-    searchTerms.clear();
+	searchTerms = [];
 	// TODO: What should we do after successfully registering the terms?
 }
 
