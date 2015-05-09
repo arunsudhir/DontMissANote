@@ -1,6 +1,6 @@
 ﻿var $loginBtn, $searchBtn, $keyBtn, $visibleKeywordCount, searchTerms;
-var doneTxt = "And we are done!";
-var inProgressText = "Please sip your cup of coffee while we look for the relevant notes... ";
+var $doneTxt = "Congratulations! You're the 100th visitor!!! Also, you'll recieve daily alerts for the search terms you entered.";
+var $inProgressText = "Please sip your cup of coffee while we look for the relevant notes... ";
 
 $(function () {
     searchTerms = [];
@@ -62,15 +62,18 @@ function ProcessFailedApiResponse(xmlHttpRequest, textStatus, errorThrown) {
 function ProcessSuccesfulApiResponse(passedObject) {
     alert('Successfully processed API response + // TODO: What should we do in the UI after successfully registering the terms? ' + passedObject);
     $('#prgBar').hide();
-    $('#status').text('And we are done!');
+    $('#status').text($doneTxt);
+    $('.list-group-item').hide();
+    $('#li0').show();
+	$('#keywordList').hide();
     searchTerms.clear();
-	searchTerms.last().remove();
 	// TODO: What should we do after successfully registering the terms?
 }
 
 
 function deleteKeywords(compId) {
-	$(compId).hide();
+    $(compId).hide();
+    
 }
 
 function updateButtons() {
@@ -111,6 +114,7 @@ function updateButtons() {
 
 	$(".delete_button").click(function(event) {
         $(event.target).closest('li').hide();
+		searchTerms.pop();
 		$visibleKeywordCount--;
 	});
 }
