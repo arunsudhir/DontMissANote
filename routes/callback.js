@@ -19,7 +19,9 @@ router.get('/', function (req, res) {
                     // Save the access token on a session. Using cookies in this case:
                     res.cookie('access_token', accessToken, { maxAge: expiresIn * 1000});
                     res.cookie('refresh_token', refreshToken);
-                    res.render('callback');
+
+                    // Now that we're authenticated, redirect to homepage again
+                    res.redirect('/');
                 } else {
                     // Handle an authentication error response
                     res.render('error', {

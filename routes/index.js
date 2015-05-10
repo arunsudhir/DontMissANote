@@ -9,8 +9,34 @@ var vasher = require('../lib/vash-worker.js');
 
 /* GET Index page */
 router.get("/", function(req, res) {
-	var authUrl = liveConnect.getAuthUrl();
-	res.render("index", { title: "OneNote API Node.js Sample", authUrl: authUrl });
+    var authUrl = liveConnect.getAuthUrl();
+    var accessToken = req.cookies["access_token"];
+    
+    // TODO: handle token refresh
+    if (accessToken) {
+
+        // We're authenticated. Get the user's info and profile picture, then render the page
+        return liveConnect.getUserInfo(accessToken, function(error, signedInUser, image, email) {
+	        if (error) {
+		        res.render("error", {
+			        message: "Whoops! Couldn't get user info or picture!",
+			        error: { details: error }
+		        });
+	        }
+
+            req.session.email = email; // Store the email in the browser session
+
+	        // Render the query page
+	        return res.render("query", {
+		        SignedInUser: signedInUser,
+		        SignedInUserPic: image
+	        });
+        });
+
+    } else {
+        // We're still not authenticated - render the homepage
+        return res.render("index", { title: "No note left behind!", authUrl: authUrl });
+    }
 });
 
 /* POST Create example request */
@@ -150,50 +176,6 @@ router.post("/", function(req, res) {
         var authUrl = liveConnect.getAuthUrl();
         return res.render("index", { title: "OneNote API Node.js Sample", authUrl: authUrl });
     }
-    
-    var userInfoResultCallback = function (error, req, httpResponse, body) {
-        if (error) {
-            return res.render("error", {
-                message: "HTTP Error",
-                error: { details: JSON.stringify(error, null, 2) }
-            });
-        }
-        
-        // Parse the body since it is a JSON response
-        var parsedBody;
-        try {
-            parsedBody = JSON.parse(body);
-        } catch (e) {
-            parsedBody = {};
-        }
-        // Get the submitted resource url from the JSON response
-        var signedInUser = parsedBody["name"] ? parsedBody["name"] : (parsedBody["emails"]["preferred"]? parsedBody["emails"]["preferred"] : null);
-        req.session.email = parsedBody["emails"]["preferred"]; 
-
-        if (signedInUser) {
-            var image = null;
-            liveConnect.getUserPic(accessToken, function (error, httpResponse, body) {
-                if (!error) {
-                    image = httpResponse.headers['content-location'];
-                    res.render("query", {
-                        SignedInUser: signedInUser,
-                        SignedInUserPic: image
-                    });
-                } 
-                else {
-                    res.render("error", {
-                        message: "Whoops! I couldn't get your picture!",
-                        error: { status: httpResponse.statusCode, details: body }
-                    });
-                    }
-            });
-        } else {
-            res.render("error", {
-                message: "Whoops! I couldn't get your information!",
-                error: { status: httpResponse.statusCode, details: body }
-            });
-        }
-    };
 
     // Request the specified create example
     switch (exampleType) {
