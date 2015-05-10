@@ -57,8 +57,7 @@ block content
                   button.btn.btn-primary(id='searchBtn') Go!
         center
          #containerActive
-          progress#prgBar.progress-striped.active
-           .bar(style='width: 0%;')
+          img#prgBar(src='/images/spinner.gif')
           p#status Please sip your cup of coffee while we look for the relevant notes... 
         form(id="createExamples" name="createExamples", method="post" style='display:none') 
          button(type="submit", name="submit", value="email" disabled) Send mail
