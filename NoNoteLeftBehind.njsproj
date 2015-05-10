@@ -73,6 +73,7 @@
     <Folder Include="public" />
     <Folder Include="public\images" />
     <Folder Include="public\javascripts" />
+    <Folder Include="public\onenoteuploads\" />
     <Folder Include="public\stylesheets" />
     <Folder Include="routes" />
     <Folder Include="views" />
