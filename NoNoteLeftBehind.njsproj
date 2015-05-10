@@ -14,8 +14,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <StartWebBrowser>True</StartWebBrowser>
     <LaunchUrl>http://onenotealerts.herokuapp.com</LaunchUrl>
-    <NodejsPort>
-    </NodejsPort>
+    <NodejsPort>80</NodejsPort>
     <NodeExeArguments>
     </NodeExeArguments>
   </PropertyGroup>
