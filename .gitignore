@@ -39,3 +39,6 @@ obj/*
 *.dll
 *.suo
 *.tmp
+
+# uploaded images
+public/onenoteuploads/*

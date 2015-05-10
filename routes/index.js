@@ -169,7 +169,12 @@ router.post("/", function(req, res) {
 				message: "HTTP Error",
 				error: { details: JSON.stringify(error, null, 2) }
 			});
-		}
+        }
+
+        return res.render("error", {
+            message: "Generic page",
+            error: { details: JSON.stringify(pagesMetadata, null, 2) }
+        });
 	};
     
     function renderHomePage(){
@@ -214,6 +219,9 @@ router.post("/", function(req, res) {
 			break;
 		case "getTermMetadata":
 			createExamples.getTermMetadata(accessToken, getSomeSharedPagesCallback, ["hackaton", "disney"]);
+            break;
+        case "saveAnImage":
+			createExamples.saveAnImage(accessToken, getSomeSharedPagesCallback);
 			break;
         case "signOut":
             renderHomePage();
