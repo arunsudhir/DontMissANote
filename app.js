@@ -41,11 +41,13 @@ app.use('/', routes);
 app.post('/registerTerms', registerTermsRoutes.registerTerms);
 app.use('/callback', callback);
 
-// catch 404 and forwarding to error handler
 app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+    res.status(404).send('Sorry cant find that!');
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
 
 // Run
