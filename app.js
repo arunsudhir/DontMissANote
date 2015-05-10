@@ -5,11 +5,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
 
-var routes = require('./routes/index');
-var registerTermsRoutes = require('./routes/registerTerms');
-var callback = require('./routes/callback');
-
 var app = express();
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,17 +21,6 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.post('/registerTerms', registerTermsRoutes.registerTerms);
-app.use('/callback', callback);
-
-// catch 404 and forwarding to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
-
 /// error handler
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
@@ -47,7 +33,20 @@ app.use(function (err, req, res, next) {
     });
 });
 
-app.set('port', process.env.PORT || 3000);
+var routes = require('./routes/index');
+var registerTermsRoutes = require('./routes/registerTerms');
+var callback = require('./routes/callback');
+
+app.use('/', routes);
+app.post('/registerTerms', registerTermsRoutes.registerTerms);
+app.use('/callback', callback);
+
+// catch 404 and forwarding to error handler
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
 // Run
 http.createServer(app).listen(app.get('port'), function () {
