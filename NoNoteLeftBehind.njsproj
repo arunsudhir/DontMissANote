@@ -13,8 +13,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <StartWebBrowser>True</StartWebBrowser>
-    <LaunchUrl>http://onenoteapisamples.com:3000</LaunchUrl>
-    <NodejsPort>3000</NodejsPort>
+    <LaunchUrl>http://onenotealerts.herokuapp.com</LaunchUrl>
+    <NodejsPort>
+    </NodejsPort>
     <NodeExeArguments>
     </NodeExeArguments>
   </PropertyGroup>
