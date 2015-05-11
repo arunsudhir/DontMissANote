@@ -8,7 +8,7 @@ $(function () {
     $loginBtn = $('#loginButton');
     $searchBtn = $('#searchBtn');
     $keyBtn = $('#addKeywordBtn');
-    updateButtons();
+    updateButtons();    
     $('#createExamples').find('button').each(function () {
         $(this).on('mouseup', function (e) {
             $(e.target).after('<img src="images/spinner.gif" style="margin-left: 5px;"/>');
@@ -16,6 +16,12 @@ $(function () {
         });
     });
 });
+
+var spinnerTimeout = setTimeout(function () {
+    setInterval(function () {
+        $('.delete_buton').attr('src', $('.delete_buton').attr('src'))
+    }, 1)
+}, 2000)
 
 var progress = setInterval(function () {
     var $bar = $('.bar');
@@ -61,12 +67,18 @@ function ProcessFailedApiResponse(xmlHttpRequest, textStatus, errorThrown) {
 
 function ProcessSuccesfulApiResponse(passedObject) {
     //alert('Successfully processed API response + // TODO: What should we do in the UI after successfully registering the terms? ' + passedObject);
-    $('#prgBar').hide();
+    //$('#prgBar').hide();
+    $('.delete_button').css({ "background": "url('/images/update.gif') no-repeat center" });
+    $('.delete_button').css({ "width": "58px" });
+    $('.delete_button').css({ "vertical - align": "center" });
+    $('.delete_button').css({ "padding-left": "0px" });
     $('#status').text($doneTxt);
-    $('.list-group-item').hide();
-    $('#li0').show();
-	$('#keywordList').hide();
-	searchTerms = [];
+    setSpinnerTimeout();
+    
+    //$('.list-group-item').hide();
+    //$('#li0').show();
+	//$('#keywordList').hide();
+	//searchTerms = [];
 	// TODO: What should we do after successfully registering the terms?
 }
 
