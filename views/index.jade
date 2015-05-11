@@ -3,12 +3,18 @@ extends layout
 block content
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        //.navbar-header
-          
-        #navbar.navbar-collapse
-        span.blah <img src='/images/onenotelogo.png' width='45' height='45' style="marigin-top:0px">&nbsp;&nbsp; OneNote Alerts
-         div.navbar-form.navbar-right(style='marigin-top:0px')
-          a.btn.btn-success( id='loginButton', href=authUrl) Sign in
+        .navbar-header
+          img#abcd(src='/images/onenotelogo.png', width='45', height='45')
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar          
+          a.not-active(style='color:#ffffff, vertical-align:middle, font-size:18px, font-weight:bold') &nbsp;&nbsp; OneNote Alerts
+            
+        #navbar.navbar-collapse.collapse
+          div.navbar-form.navbar-right
+            a.btn.btn-success(id='loginButton', href=authUrl) Sign in
     //Carousel
     .jumbotron
       .container
