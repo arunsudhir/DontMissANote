@@ -24,6 +24,7 @@
     <Compile Include="lib\ImageSaver.js" />
     <Compile Include="routes\registerTerms.js" />
     <Content Include="public\images\onenotelogo.png" />
+    <Content Include="public\images\stopped.gif" />
     <Content Include="public\images\update.gif" />
     <Content Include="public\stylesheets\bootstrap-theme.min.css" />
     <Content Include="public\stylesheets\bootstrap.min.css" />

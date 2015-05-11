@@ -17,11 +17,7 @@ $(function () {
     });
 });
 
-var spinnerTimeout = setTimeout(function () {
-    setInterval(function () {
-        $('.delete_buton').attr('src', $('.delete_buton').attr('src'))
-    }, 1)
-}, 2000)
+
 
 var progress = setInterval(function () {
     var $bar = $('.bar');
@@ -73,7 +69,9 @@ function ProcessSuccesfulApiResponse(passedObject) {
     $('.delete_button').css({ "vertical - align": "center" });
     $('.delete_button').css({ "padding-left": "0px" });
     $('#status').text($doneTxt);
-    setSpinnerTimeout();
+    setTimeout(function () {
+            $('.delete_button').css({ "background": "url('/images/stopped.gif') no-repeat center" });
+    }, 2600);
     
     //$('.list-group-item').hide();
     //$('#li0').show();
@@ -81,6 +79,8 @@ function ProcessSuccesfulApiResponse(passedObject) {
 	//searchTerms = [];
 	// TODO: What should we do after successfully registering the terms?
 }
+
+
 
 function clickOnPlusButton() {
     $visibleKeywordCount++;
