@@ -3,10 +3,11 @@ extends layout
 block content
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        .navbar-header
-          span.blah <img src='/images/onenotelogo.png' width='45' height='45' style="marigin-top:0px">&nbsp;&nbsp; OneNote Alerts
-        #navbar.navbar-collapse.collapse
-         div.navbar-form.navbar-right
+        //.navbar-header
+          
+        #navbar.navbar-collapse
+        span.blah <img src='/images/onenotelogo.png' width='45' height='45' style="marigin-top:0px">&nbsp;&nbsp; OneNote Alerts
+         div.navbar-form.navbar-right(style='marigin-top:0px')
           a.btn.btn-success( id='loginButton', href=authUrl) Sign in
     //Carousel
     .jumbotron
@@ -25,10 +26,10 @@ block content
                 p
                   //a.btn.btn-lg.btn-primary(role='button', id='loginButton') Sign In
             .item
-              img.second-slide(src='data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==', alt='Second slide')
+              img.second-slide(src='/images/car2.jpg', alt='Second slide')
               .carousel-caption
-                h2 Hit Go, and check your inbox. (That's it?)
-                p Watch out for daily mail alerts for Shared content with your search terms highlighted!
+                h2 Hit Go, and check your inbox.
+                p Watch out for daily mail alerts for Shared content with search terms highlighted!
          // a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
             span.glyphicon.glyphicon-chevron-left(aria-hidden='false')
             span.sr-only Previous

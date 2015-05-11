@@ -22,8 +22,13 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Compile Include="lib\ImageSaver.js" />
+    <Compile Include="public\javascripts\carousel.js" />
+    <Compile Include="public\javascripts\collapse.js" />
+    <Compile Include="public\javascripts\tooltip.js" />
+    <Compile Include="public\javascripts\transition.js" />
     <Compile Include="routes\registerTerms.js" />
     <Content Include="public\images\car1.jpg" />
+    <Content Include="public\images\car2.jpg" />
     <Content Include="public\images\onenotelogo.png" />
     <Content Include="public\images\stopped.gif" />
     <Content Include="public\images\update.gif" />
